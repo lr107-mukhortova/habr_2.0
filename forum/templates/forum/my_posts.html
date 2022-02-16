@@ -1,0 +1,18 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {% block content%}
+    <a class="btn btn-success" href="{% url 'make_post'%}">
+        Создать новый пост
+    </a>
+    
+    {% for post in posts%}
+        <h1>{{post.model_name}}</h1>
+        <p>{{post.short_description}}</p>
+        <a href="{% url 'my_post' post.id %}">Больше информации</a>
+    
+    {% endfor %}
+    {% endblock%}
+</body>
+</html>

@@ -1,0 +1,40 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {%block content%}
+    <h2>
+        Профиль
+    </h2>
+
+    <div>
+        <img src="{{obj.avatar.url}}" width="189" height="189" alt="Аватар">
+    </div>
+    <a class="btn btn-primary" href="{% url 'avatar_edit'%}">
+        Изменить изображение профиля
+    </a>
+    <p>
+        E-mail: {{obj.email}}
+    </p>
+    <p>
+        Никнейм: {{obj.username}}
+    </p>
+
+    <a class="btn btn-primary" href="{% url 'common_edit'%}">
+        Изменить данные
+    </a>
+
+    <p>
+        {{prof.status}}
+    </p>
+
+    <a class="btn btn-primary" href="{% url 'prof_edit'%}">Изменить статус</a>
+
+    <a class="btn btn-primary" href="{% url 'privat_edit'%}">Изменить пароль</a>
+
+    <a class="btn btn-danger" href="{% url 'logout' %}"> Выйти</a>
+
+    {% endblock%}
+    
+</body>
+</html>

@@ -1,0 +1,41 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+
+
+    {%block content%}
+    <h3>{{user.email}}</h3>
+        <form action="" method="POST">
+            <label for="admin">
+                Пользователь является администратором
+            </label>
+            <select class="form-select" name="admin" id="admin">
+                {% if user.admin %}
+                    <option value="1">Да</option>
+                    <option value="0">Нет</option>
+                {% else %}
+                    <option value="0">Нет</option>
+                    <option value="1">Да</option>
+                {% endif %}
+            </select>
+
+            <label for="moderator">
+                Пользователь является модератором
+            </label>
+            <select class="form-select mb-3" name="moderator" id="moderator">
+                {% if user.moderator %}
+                    <option value="1">Да</option>
+                    <option value="0">Нет</option>
+                {% else %}
+                    <option value="0">Нет</option>
+                    <option value="1">Да</option>
+                {% endif %}
+            </select>
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="OK">
+
+        </form>
+    {%endblock%}
+</body>
+</html>

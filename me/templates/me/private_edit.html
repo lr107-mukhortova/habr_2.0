@@ -1,0 +1,22 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {% block content%}
+    <h2>
+        Изменение пароля
+    </h2>
+    {{error}}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="o_password">Старый пароль</label>
+        <input type="password" class="form-control" id="o_password" name="o_password" value="">
+
+        <label for="password">Новый пароль</label>
+        <input type="password" class="form-control mb-3" id="password" name="password" value="">
+
+        <input type="submit" class="btn btn-primary" value="OK">
+    </form>
+    {% endblock%}
+</body>
+</html>

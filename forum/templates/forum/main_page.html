@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Habr 2.0
+    </title>
+    <link rel='stylesheet' href="{% static 'css/bootstrap.min.css' %}">
+    {% block script%}
+    {% endblock %}
+    {% block style%}
+    {% endblock %}
+</head>
+<body>
+    {% block menu%}
+
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #746ceb;">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                Habr 2.0
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{% url 'main_page'%}">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'posts'%}">Все посты</a></li>
+                {% if request.session.authorized%}
+                <li class="nav-item"><a class="nav-link" href="{% url 'my_posts'%}">Мои посты</a></li>
+                {% endif %}
+                {% if request.session.authorized%}
+                <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Профиль</a></li>
+                {% endif %}
+                {% if request.session.admin%}
+                <li class="nav-item"><a class="nav-link" href="{% url 'admin_panel'%}">Изменение прав доступа</a></li>
+                {% endif%}
+                {% if not request.session.authorized %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login'%}">Войти</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'registration'%}">Зарегистрироваться</a></li>
+                {% endif %}
+                {% if request.session.authorized%}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout'%}">Выйти</a></li>
+                {% endif%}
+              </ul>
+            </div>
+        </div>
+      </nav>
+
+    {% endblock%}
+    <div class="container pt-3">
+        {%block main_inf%}
+        <h1>
+            Этот ресурс для постов о машинном обучении, образовании, учёбе, ИТИС
+        </h1>
+        {%endblock%}
+        {% block content%}
+        {% endblock %}
+    </div>
+</body>
+</html>

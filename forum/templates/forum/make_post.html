@@ -1,0 +1,26 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {% block content%}
+    <div class="container">
+    <form action="" method="POST">
+        {{form.as_p}}
+        {% csrf_token %}
+
+
+        <label for="select">
+            Теги
+        </label>
+        <select id="select" class="form-select mb-3" multiple size="3" name='tags'>
+            {% for tag in tags%}
+            <option value="{{tag.name}}">{{tag.name}}</option>
+            {%endfor%}
+        </select>
+
+        <input class="btn btn-primary" type="submit" value="OK">
+    </form>
+    </div>
+    {% endblock%}
+</body>
+</html>

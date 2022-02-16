@@ -1,0 +1,16 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {% block content%}
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit" value="OK">
+    </form>
+    
+    <p><a href="{% url 'my_post' post.id %}">К посту</a></p>
+    {% endblock%}
+
+</body>
+</html>

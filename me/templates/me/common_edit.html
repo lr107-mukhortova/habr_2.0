@@ -1,0 +1,22 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {% block content%}
+    <h2>
+        Редактирование профиля
+    </h2>
+    <p>{{error}}</p>
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="email">E-mail</label>
+        <input type="text" class="form-control" id="email" name="email" value="{{ obj.email }}">
+
+        <label for="username">Никнейм</label>
+        <input type="text" class="form-control mb-3" id="username" name="username" value="{{ obj.username }}">
+
+        <input type="submit" class="btn btn-primary" value="OK">
+    </form>
+    {% endblock%}
+</body>
+</html>

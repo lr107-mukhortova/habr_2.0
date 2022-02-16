@@ -1,0 +1,37 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {%block content%}
+
+        <form action="" method="POST">
+            <label for="user_name">
+                Поиск по email (до @)
+            </label>
+            <input class="form-control mb-2" type="text" name="user_name">
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="OK">
+        </form>
+        {% for user in users%}
+            <div class="mb-3">
+                <h4>
+                    {{user.email}}
+                </h4>
+                  {% if user.moderator %}
+                    <p style="color: #198754">
+                      Является модератором
+                    </p>
+                  {% endif %}
+                  {% if user.admin %}
+                    <p style="color: #198754">
+                      Является админом
+                    </p>
+                  {% endif %}
+                <a class="btn btn-primary" href="{% url 'user_per_change' user.id%}">Изменить права доступа</a>
+                <a class="btn btn-primary" href="{% url 'admin_user_change' user.id %}">Изменить пользователя</a>
+            </div>
+        {%endfor%}
+
+    {%endblock%}
+</body>
+</html>

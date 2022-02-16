@@ -1,0 +1,31 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {% block content%}
+    <h1>{{post.model_name}}</h1>
+    <p>{{post.short_description}}</p>
+    <p>{{post.full_description}}</p>
+    <p>
+        <a href="{{post.ref_on_git}}">{{post.ref_on_git}}</a>
+    </p>
+    <a class="btn btn-success" href="{% url 'edit_post' post.id %}" >✎</a>
+    <a class="btn btn-danger" href="{% url 'del_post' post.id %}">🗑</a>
+
+    {% for comment in comments%}
+        <div class="py-2">
+            <div>
+                {{comment.from_user}}
+            </div>
+            <small>
+                {{comment.created_at}}
+            </small>
+            <p>
+                {{comment.body}}
+            </p>
+        </div>
+    {% endfor%}
+    <p><a href="{% url 'my_posts'%}"> К постам</a></p>
+    {% endblock%}
+</body>
+</html>

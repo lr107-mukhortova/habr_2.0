@@ -1,0 +1,36 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {%block content%}
+    <h2>
+        Профиль
+    </h2>
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <img src="{{obj.avatar.url}}" width="189" height="189" alt="Аватар">
+        <div>
+            <input type="file" name="image">
+        </div>
+
+        <label for="email">E-mail</label>
+        <input class="form-control" type="text" name="email" id="email" value="{{ obj.email }}">
+
+        <label for="username">Никнейм</label>
+        <input class="form-control" type="text" name="username" id="username" value="{{ obj.username }}">
+
+
+        <label for="status">Статус</label>
+        <textarea class="form-control" name="status" cols="30" rows="10" id="status">{{prof.status}}</textarea>
+
+        <label for="password">Новый пароль</label>
+        <input class="form-control mb-3" type="password" name="password" id="password">
+
+        <input type="submit" class="btn btn-primary" value="Изменить">
+    </form>
+
+    <a href="{% url 'admin_panel'%}">К пользователям</a>
+    {% endblock%}
+    
+</body>
+</html>

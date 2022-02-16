@@ -1,0 +1,16 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+    {% block content%}
+    <img src="{{obj.avatar.url}}" width="189" height="189" alt="Аватар">
+    <form action="" enctype="multipart/form-data" method="POST">
+        <div class="mb-3">
+            <input type="file" name="image">
+        </div>
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="OK">
+    </form>
+    {% endblock%}
+</body>
+</html>

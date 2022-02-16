@@ -1,0 +1,16 @@
+{% extends "forum/main_page.html" %}
+<body>
+    {%block main_inf%}
+    {%endblock%}
+
+    {%block content%}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label for="status">Статус</label>
+        <textarea name="status" id="status" class="form-control mb-3" cols="30" rows="10">{{prof.status}}</textarea>
+
+        <input type="submit" class="btn btn-primary" value="OK">
+    </form>
+    {%endblock%}
+</body>
+</html>

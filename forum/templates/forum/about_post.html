@@ -1,0 +1,76 @@
+{% extends "forum/main_page.html" %}
+{% block script%}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#comment_form").submit(function(e){
+            e.preventDefault();
+            var form = $(this);
+            $.ajax({
+
+                type: 'POST',
+                url: "{% url 'add_comment' post.id%}",
+                data: form.serialize(),
+                success: function (result) {
+                $("#comment").html(result)
+                },
+                
+            });
+        });
+    });
+    </script>
+    {% endblock%}
+<body>
+
+    {%block main_inf%}
+    {%endblock%}
+        {% block content%}
+        <h3>{{post.user.username}}</h3>
+        <h2>{{post.model_name}}</h2>
+        <p>{{post.short_description}}</p>
+        <p>{{post.full_description}}</p>
+        <a href="{{post.ref_on_git}}">{{post.ref_on_git}}</a>
+        {% if request.session.admin or request.session.moderator%}
+        <a class="btn btn-danger" href="{% url 'admin_post_del' post.id %}">🗑</a>
+        <a class="btn btn-success" href="{% url 'admin_post_edit' post.id%}">Редактировать</a></p>
+        {%endif%}
+
+        {% if request.session.authorized%}
+        <form method="POST" id="comment_form">
+            <label for="comment">Оставить коментарий</label>
+            <textarea id="comment" class="form-control mb-3" name="comment"></textarea>
+            {% csrf_token %}
+            <input class="btn btn-primary" type="submit" value="OK">
+        </form>
+        {% endif%}
+
+        <p>
+            <a href="{% url 'posts'%}">
+                К постам
+            </a>
+        </p>
+
+        <div id="comments">
+            {% for comment in comments%}
+            <div class="py-2">
+                <div>
+                    {{comment.from_user}}
+                </div>
+                <small>
+                    {{comment.created_at}}
+                </small>
+                <p>
+                    {{comment.body}}
+                </p>
+                {% if request.session.admin or request.session.moderator%}
+                    <p>
+                        <a class="btn btn-danger" href="{% url 'admin_comment_del' comment.id%}">🗑</a>
+                    </p>
+                {%endif%}
+            </div>
+            {% endfor%}
+        {% endblock%}
+        </div>
+
+</body>
+</html>
